@@ -5,7 +5,7 @@
 	"author": "@softwarecurator",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/softwarecurator/@solana/svelte"
+		"url": "https://github.com/softwarecurator/solana-svelte"
 	},
 	"keywords": [
 		"solana",
