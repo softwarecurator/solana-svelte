@@ -2,4 +2,6 @@
 	import { ConnectButton } from '$lib';
 </script>
 
-<ConnectButton maxNumberOfWallets={3} />
+<div class="flex justify-center items-center h-screen">
+	<ConnectButton maxNumberOfWallets={3} />
+</div>

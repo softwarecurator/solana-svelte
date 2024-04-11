@@ -52,8 +52,11 @@
 <svelte:window on:keyup={handleKeyup} />
 
 {#if !wallet}
-	<button class="px-4 py-2 bg-blue-500 text-white rounded-md" onclick={openModal}>
-		<p>Select Wallet</p>
+	<button
+		class="px-4 py-2 bg-blue-500 cursor-pointer text-white rounded-lg hover:bg-blue-600 hover:scale-105 transition-all ease-in-out"
+		onclick={openModal}
+	>
+		<p>Connect Wallet</p>
 	</button>
 {:else if !base58}
 	<button class="px-4 py-2 bg-blue-500 text-white rounded-md" onclick={openModal}>
@@ -75,7 +78,6 @@
 				aria-label="dropdown-list"
 				class="absolute bg-white shadow-md mt-2 py-1 w-48 rounded-md z-10"
 				role="menu"
-				use:portal
 			>
 				<li role="menuitem">
 					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" on:click={copyAddress}>
