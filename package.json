@@ -1,5 +1,5 @@
 {
-	"name": "@solana/svelte",
+	"name": "@softwarecurator/solana-svelte",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
