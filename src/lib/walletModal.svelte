@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { walletStore } from '$lib';
 	import { WalletReadyState } from '@solana/wallet-adapter-base';
-	import { fade } from 'svelte/transition';
-	import { clickOutside } from './clickOutside.js';
+	import Modal from '$lib/modal.svelte';
 
-	let { modalVisible = $bindable(), maxNumberOfWallets } = $props();
+	let {
+		modalVisible = $bindable(),
+		maxNumberOfWallets
+	}: {
+		modalVisible: boolean;
+		maxNumberOfWallets?: number;
+	} = $props();
 
 	let walletsAvailable = $derived(
 		$walletStore.wallets.filter(
@@ -51,17 +56,11 @@
 </script>
 
 {#if walletsAvailable}
-	<div transition:fade={{ duration: 300 }}>
-		<div
-			class="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center"
-			use:clickOutside={() => {
-				console.log('clickOutside');
-				if (modalVisible) {
-					modalVisible = false;
-				}
-			}}
-		>
+	<Modal bind:active={modalVisible}>
+		<div class="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
 			<div class="bg-white dark:bg-gray-800 rounded-lg p-5 max-w-sm w-full">
+				<h2 class="text-lg font-semibold text-center">Select Wallet</h2>
+				<button onclick={() => (modalVisible = !modalVisible)}>Close</button>
 				{#each $walletStore.wallets as { adapter: { name, icon }, readyState }}
 					<button onclick={() => handleClick(name)} class="w-full">
 						<div
@@ -78,7 +77,7 @@
 				{/each}
 			</div>
 		</div>
-	</div>
+	</Modal>
 {:else}
 	<p class="text-sm text-grey2">No Solana Wallets Found</p>
 {/if}

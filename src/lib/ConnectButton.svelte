@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { walletStore } from '$lib';
-	import { clickOutside } from './clickOutside.js';
+	import portal from './clickOutside.js';
 	import WalletModal from './walletModal.svelte';
 
 	const { maxNumberOfWallets = 3 } = $props();
@@ -43,12 +43,6 @@
 		return base58.slice(0, 4) + '..' + base58.slice(-4);
 	}
 
-	async function connectWallet(event: MouseEvent) {
-		closeModal();
-		await select(event.detail);
-		await connect();
-	}
-
 	async function disconnectWallet(event: MouseEvent) {
 		closeDropdown();
 		await disconnect();
@@ -81,11 +75,7 @@
 				aria-label="dropdown-list"
 				class="absolute bg-white shadow-md mt-2 py-1 w-48 rounded-md z-10"
 				role="menu"
-				use:clickOutside={() => {
-					if (dropDrownVisible) {
-						closeDropdown();
-					}
-				}}
+				use:portal
 			>
 				<li role="menuitem">
 					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" on:click={copyAddress}>
