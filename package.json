@@ -1,6 +1,20 @@
 {
 	"name": "@softwarecurator/solana-svelte",
 	"version": "0.0.1",
+	"license": "MIT",
+	"author": "@softwarecurator",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/softwarecurator/@solana/svelte"
+	},
+	"keywords": [
+		"solana",
+		"web3",
+		"wallet",
+		"svelte",
+		"sveltekit",
+		"phantom"
+	],
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
