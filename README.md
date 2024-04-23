@@ -20,7 +20,7 @@ Example Usage:
 
 ```svelte
 <script lang="ts">
-	import { SolanaProvider } from '$lib';
+	import { SolanaProvider } from '@softwarecurator/solana-svelte';
 
 	const { children } = $props();
 </script>
@@ -36,7 +36,7 @@ The `ConnectButton` is a svelte component that gives the developer a quick butto
 
 ```svelte
 <script lang="ts">
-	import { ConnectButton } from '$lib';
+	import { ConnectButton } from '@softwarecurator/solana-svelte';
 </script>
 
 <div class="flex justify-center items-center h-screen">
