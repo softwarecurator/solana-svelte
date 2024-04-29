@@ -80,17 +80,17 @@
 				role="menu"
 			>
 				<li role="menuitem">
-					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" on:click={copyAddress}>
+					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" onclick={copyAddress}>
 						{copied ? 'Copied' : 'Copy address'}
 					</button>
 				</li>
 				<li role="menuitem">
-					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" on:click={openModal}>
+					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" onclick={openModal}>
 						Connect a different wallet
 					</button>
 				</li>
 				<li role="menuitem">
-					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" on:click={disconnectWallet}>
+					<button class="px-4 py-2 hover:bg-gray-100 w-full text-left" onclick={disconnectWallet}>
 						Disconnect
 					</button>
 				</li>
