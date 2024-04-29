@@ -7,6 +7,7 @@
 		isWalletAdapterCompatibleStandardWallet
 	} from '@solana/wallet-adapter-base';
 	import { StandardWalletAdapter } from '@solana/wallet-standard-wallet-adapter-base';
+	// @ts-ignore
 	import { initialize } from '@aztemi/svelte-on-solana-wallet-adapter-core';
 
 	const {
@@ -24,6 +25,7 @@
 	} = $props();
 
 	let allWallets: Adapter[] = $state([]);
+	let mounted = $state(false);
 
 	function detectedFirst(state: any, a: Adapter, b: Adapter) {
 		let sort: number = 0;
@@ -63,7 +65,11 @@
 			autoConnect,
 			localStorageKey
 		});
+
+		mounted = true;
 	});
 </script>
 
-{@render children()}
+{#if mounted}
+	{@render children()}
+{/if}
