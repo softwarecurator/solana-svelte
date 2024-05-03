@@ -1,11 +1,11 @@
 <script lang="ts">
+	//@ts-ignore
 	import { walletStore } from '$lib';
-	import portal from './clickOutside.js';
 	import WalletModal from './walletModal.svelte';
 
 	const { maxNumberOfWallets = 3 } = $props();
 
-	const { publicKey, wallet, disconnect, connect, select } = $derived($walletStore);
+	const { publicKey, wallet, disconnect } = $derived($walletStore);
 
 	let dropDrownVisible = $state(false),
 		modalVisible = $state(false),
@@ -29,9 +29,7 @@
 		closeDropdown();
 	};
 
-	const closeModal = () => (modalVisible = false);
-
-	function handleKeyup(e) {
+	function handleKeyup(e: KeyboardEvent) {
 		if (e.key == 'Escape') {
 			closeDropdown();
 		}
@@ -43,7 +41,7 @@
 		return base58.slice(0, 4) + '..' + base58.slice(-4);
 	}
 
-	async function disconnectWallet(event: MouseEvent) {
+	async function disconnectWallet() {
 		closeDropdown();
 		await disconnect();
 	}
@@ -53,7 +51,7 @@
 
 {#if !wallet}
 	<button
-		class="px-4 py-2 bg-blue-500 cursor-pointer text-white rounded-lg hover:bg-blue-600 hover:scale-105 transition-all ease-in-out"
+		class="px-4 py-2 bg-black/90 cursor-pointer text-white rounded-lg hover:bg-gray-800 hover:scale-105 transition-all ease-in-out"
 		onclick={openModal}
 	>
 		<p>Connect Wallet</p>
@@ -66,7 +64,7 @@
 	<div class="relative">
 		<button
 			onclick={openDropdown}
-			class="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-between"
+			class="px-6 py-2 bg-white text-black shadow-2xl hover:scale-105 transition-all ease-in-out border-2 border-gray-300/25 cursor-pointer rounded-lg flex items-center justify-between"
 		>
 			<div class="flex items-center">
 				<img src={wallet.icon} alt={`${wallet.name} icon`} class="w-6 h-6 mr-2" />

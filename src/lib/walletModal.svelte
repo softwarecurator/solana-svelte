@@ -1,7 +1,9 @@
 <script lang="ts">
+	//@ts-ignore
 	import { walletStore } from '$lib';
 	import { WalletReadyState } from '@solana/wallet-adapter-base';
 	import Modal from '$lib/modal.svelte';
+	import { fly } from 'svelte/transition';
 
 	let {
 		modalVisible = $bindable(),
@@ -59,23 +61,38 @@
 
 {#if walletsAvailable}
 	<Modal bind:active={modalVisible}>
-		<div class="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
-			<div class="bg-white dark:bg-gray-800 rounded-lg p-5 max-w-sm w-full relative">
-				<h2 class="text-lg text-white font-semibold text-center mb-6">Select Wallet</h2>
+		<div class="fixed inset-0 bg-black/5 flex justify-center items-center close-button">
+			<div
+				transition:fly={{ y: 200, duration: 300 }}
+				class="bg-gray-800 rounded-3xl shadow-xl p-5 max-w-sm w-full relative"
+			>
+				<h2 class="text-lg text-white font-semibold text-center mb-6">Connect a Wallet</h2>
 				<button
-					class="absolute text-white cursor-pointer right-0 top-0 p-2"
-					onclick={() => (modalVisible = !modalVisible)}>X</button
+					class="absolute text-white cursor-pointer right-0 bg-gray-700 rounded-full top-0 p-2 m-2 text-white"
+					onclick={() => (modalVisible = !modalVisible)}
 				>
-				<div class="flex flex-col gap-1">
+					<svg
+						width="13"
+						height="13"
+						fill="currentColor"
+						viewBox="0 0 13 13"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M11.25 0.75L6.5 5.5L1.75 0.75L0.75 1.75L5.5 6.5L0.75 11.25L1.75 12.25L6.5 7.5L11.25 12.25L12.25 11.25L7.5 6.5L12.25 1.75L11.25 0.75Z"
+						/>
+					</svg>
+				</button>
+				<div class="flex flex-col gap-2">
 					{#each $walletStore.wallets.slice(0, maxNumberOfWallets) as { adapter: { name, icon }, readyState }}
 						<button onclick={() => handleClick(name)} class="w-full">
 							<div
-								class="border group text-sm h-11 cursor-pointer dark:border-gray-400 border-gray-500/50 rounded-full w-full text-center text-white flex items-center justify-start px-5 gap-x-3"
+								class="border hover:bg-gray-700 group text-sm h-11 cursor-pointer dark:border-gray-400 border-gray-500/50 rounded-full w-full text-center text-white flex items-center justify-start px-5 gap-x-3"
 							>
 								<img src={icon} class="mr-1 w-7 h-7" alt={`${name} icon`} />
 								{name}
 
-								<p class="text-sm text-gray-500">
+								<p class="text-sm text-gray-400">
 									{readyState === WalletReadyState.Installed ? 'Detected' : ''}
 								</p>
 							</div>
